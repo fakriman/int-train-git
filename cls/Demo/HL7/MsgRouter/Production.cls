@@ -3,12 +3,8 @@ Class Demo.HL7.MsgRouter.Production Extends Ens.Production [ ClassType = "", Pro
 
 XData ProductionDefinition
 {
-<Production Name="Demo.HL7.MsgRouter.Production" TestingEnabled="false" LogGeneralTraceEvents="false">
-  <Description>Routes HL7 messages based on message source and contents. To learn more, click on ABC_Router or XYZ_Router. Click View Rules to see message routing rules.
-
-The production uses a routing process Ens.Alert to route alerts. The rule in Ens.Alert consults a lookup table to see where to send the alert.
-
-To demonstrate alerts, give EMailAlertOperation a valid STMP server and Recipient. You may also edit the AlertTable lookup table. Temporarily assign a bad File Path to an enabled file service.</Description>
+<Production Name="Demo.HL7.MsgRouter.Production" TestingEnabled="true" LogGeneralTraceEvents="true">
+  <Description>Routes HL7 messages based on message source and contents. To learn more, click on ABC_Router or XYZ_Router. Click View Rules to see message routing rules.The production uses a routing process Ens.Alert to route alerts. The rule in Ens.Alert consults a lookup table to see where to send the alert.To demonstrate alerts, give EMailAlertOperation a valid STMP server and Recipient. You may also edit the AlertTable lookup table. Temporarily assign a bad File Path to an enabled file service.</Description>
   <ActorPoolSize>1</ActorPoolSize>
   <Item Name="ABC_HL7FileService" Category="" ClassName="EnsLib.HL7.Service.FileService" PoolSize="1" Enabled="true" Foreground="false" Comment="Test source of HL7 messages." LogTraceEvents="true" Schedule="">
     <Setting Target="Host" Name="InactivityTimeout">0</Setting>
@@ -25,7 +21,7 @@ To demonstrate alerts, give EMailAlertOperation a valid STMP server and Recipien
     <Setting Target="Host" Name="DefCharEncoding">Latin1</Setting>
     <Setting Target="Host" Name="AlertGracePeriod">0</Setting>
     <Setting Target="Host" Name="AlertOnError">1</Setting>
-    <Setting Target="Host" Name="ArchiveIO">0</Setting>
+    <Setting Target="Host" Name="ArchiveIO">1</Setting>
     <Setting Target="Adapter" Name="FilePath">/shared/INTTrain/HL7/MsgRouter/In/</Setting>
     <Setting Target="Adapter" Name="FileSpec">ABC*</Setting>
     <Setting Target="Adapter" Name="ArchivePath">/shared/INTTrain/HL7/MsgRouter/inarchive/</Setting>
@@ -247,6 +243,23 @@ To demonstrate alerts, give EMailAlertOperation a valid STMP server and Recipien
     <Setting Target="Adapter" Name="Overwrite">0</Setting>
     <Setting Target="Adapter" Name="Charset">Default</Setting>
     <Setting Target="Adapter" Name="OpenTimeout">5</Setting>
+  </Item>
+  <Item Name="RDEFileService" Category="" ClassName="EnsLib.HL7.Service.FileService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+    <Setting Target="Host" Name="MessageSchemaCategory">2.5</Setting>
+    <Setting Target="Adapter" Name="FilePath">/shared/INTTrain/HL7/MsgRouter/In/</Setting>
+    <Setting Target="Adapter" Name="FileSpec">RDE*</Setting>
+    <Setting Target="Adapter" Name="Charset">Native</Setting>
+    <Setting Target="Adapter" Name="CallInterval">1</Setting>
+    <Setting Target="Host" Name="TargetConfigNames">GetRDEBP</Setting>
+  </Item>
+  <Item Name="ORMOut" Category="" ClassName="EnsLib.HL7.Operation.FileOperation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+    <Setting Target="Adapter" Name="FilePath">/shared/INTTrain/HL7/MsgRouter/Out/</Setting>
+    <Setting Target="Host" Name="Filename">%H%M_RDE_001_%F.txt</Setting>
+  </Item>
+  <Item Name="RDEEvaluate_Router" Category="" ClassName="EnsLib.HL7.MsgRouter.RoutingEngine" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+    <Setting Target="Host" Name="BusinessRuleName">Demo.HL7.MsgRouter.RDEEvaluate</Setting>
+  </Item>
+  <Item Name="GetRDEBP" Category="" ClassName="Train.HL7.GetRDEBP" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
   </Item>
 </Production>
 }

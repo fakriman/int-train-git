@@ -1,6 +1,11 @@
 Class Demo.Loan.BankEvenLoanAppTransform Extends Ens.DataTransformDTL [ DependsOn = (Demo.Loan.Msg.Application, Demo.Loan.Msg.Approval) ]
 {
 
+/// Comentarios previos de ayuda
+/// <EXAMPLE>
+/// Do ##class(Demo.Loan.BankEvenLoanAppTransform).Test()
+/// </EXAMPLE>
+/// Fin de comentarios previos de ayuda
 Parameter IGNOREMISSINGSOURCE = 0;
 
 Parameter REPORTERRORS = 0;

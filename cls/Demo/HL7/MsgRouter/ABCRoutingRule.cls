@@ -1,5 +1,4 @@
 /// 
-
 Class Demo.HL7.MsgRouter.ABCRoutingRule Extends Ens.Rule.Definition [ ProcedureBlock ]
 {
 
@@ -7,7 +6,6 @@ Parameter RuleAssistClass = "EnsLib.HL7.MsgRouter.RuleAssist";
 
 XData RuleDefinition [ XMLNamespace = "http://www.intersystems.com/rule" ]
 {
-
 <ruleDefinition alias="" context="EnsLib.HL7.MsgRouter.RoutingEngine" production="Demo.HL7.MsgRouter.Production">
 
 <ruleSet name="Rules for  ABC application messages" effectiveBegin="" effectiveEnd="">

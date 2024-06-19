@@ -1,6 +1,7 @@
 Class HL7.ORUR01v22ToORUR01v23DTL Extends Ens.DataTransformDTL [ DependsOn = EnsLib.HL7.Message ]
 {
 
+/// Comment
 Parameter IGNOREMISSINGSOURCE = 1;
 
 Parameter REPORTERRORS = 1;
